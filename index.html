@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Ayush Saini — IoT Engineer, Full-Stack Developer, Mechanical Diploma Holder & Competitive Athlete. Futuristic portfolio.">
+    <title>Ayush Saini · Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;600;700;800;900&family=JetBrains+Mono:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="scanlines"></div>
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- ── PRELOADER ─────────────────────────────────────────── -->
+    <div id="preloader">
+        <p class="preloader-logo">AS</p>
+        <div class="preloader-ring">
+            <div class="preloader-ring-outer"></div>
+            <div class="preloader-ring-inner"></div>
+            <div class="preloader-percent">0%</div>
+        </div>
+        <div class="preloader-bar">
+            <div class="preloader-bar-fill"></div>
+        </div>
+        <p class="preloader-text">Booting Ayush Saini · Portfolio v2.6</p>
+    </div>
+
+    <!-- ── NAVBAR ─────────────────────────────────────────────── -->
+    <nav id="navbar">
+        <span class="nav-logo">Ayush</span>
+        <div class="nav-dot"></div>
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#achievements" class="nav-link">Awards</a>
+        <a href="#contact" class="nav-link nav-cta">Contact</a>
+    </nav>
+
+    <!-- ── HERO ──────────────────────────────────────────────── -->
+    <section id="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-grid-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                Available for Projects · 2026
+            </div>
+
+            <h1 class="hero-name">
+                <span class="word split-chars">AYUSH SAINI</span>
+            </h1>
+
+            <p class="hero-tagline">
+                <span id="typed-text"></span><span class="typed-cursor">|</span>
+                <br>
+                Building the future — one circuit, one commit, one sprint at a time.
+            </p>
+
+            <div class="hero-cta-group">
+                <a href="#projects" class="btn-primary magnetic">
+                    <i class="ri-rocket-line"></i> View My Work
+                </a>
+                <a href="#contact" class="btn-secondary magnetic">
+                    <i class="ri-send-plane-line"></i> Get In Touch
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span class="scroll-text">Scroll</span>
+        </div>
+    </section>
+
+    <!-- ── ABOUT ──────────────────────────────────────────────── -->
+    <section id="about">
+
+        <div class="about-left">
+            <span class="section-label">01 · About Me</span>
+            <h2 class="section-title">
+                Engineered from<br>
+                <span class="gradient-text">Curiosity &amp; Code</span>
+            </h2>
+
+            <p class="about-description">
+                I'm <span>Ayush Saini</span> — an IoT engineer, full-stack developer, and competitive athlete.
+                From <span>Mechanical Diploma</span> roots to <span>B.Tech Computer Science</span>,
+                I combine hardware knowledge with modern software to build smart, connected solutions.
+                Driven by an unstoppable passion for <span>innovation and performance</span>.
+            </p>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number" data-count="25" data-suffix="+">0+</div>
+                    <div class="stat-label">Projects Built</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="12" data-suffix="+">0+</div>
+                    <div class="stat-label">Certifications</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="8" data-suffix="">0</div>
+                    <div class="stat-label">Awards Won</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-right">
+            <div class="profile-card">
+                <div class="profile-card-glow"></div>
+
+                <div class="profile-avatar-wrapper">
+                    <div class="profile-avatar-ring"></div>
+                    <div class="profile-avatar">AS</div>
+                </div>
+
+                <h3 class="profile-name">Ayush Saini</h3>
+                <p class="profile-role">IoT ENGINEER · CS DEVELOPER · ATHLETE</p>
+
+                <div class="skill-tags">
+                    <span class="skill-tag iot">🔌 Arduino</span>
+                    <span class="skill-tag iot">📡 ESP32</span>
+                    <span class="skill-tag iot">⚙️ Mechanical</span>
+                    <span class="skill-tag code">⚛️ React</span>
+                    <span class="skill-tag code">🟢 Node.js</span>
+                    <span class="skill-tag code">🐍 Python</span>
+                    <span class="skill-tag code">🗄️ MongoDB</span>
+                    <span class="skill-tag sports">🏃 Athletics</span>
+                    <span class="skill-tag sports">🏊 Swimming</span>
+                    <span class="skill-tag sports">🏐 Volleyball</span>
+                </div>
+
+                <div
+                    style="position:absolute;top:16px;right:16px;width:40px;height:40px;border:1px dashed rgba(0,245,255,0.2);border-radius:50%;animation:orbitSlow 8s linear infinite;pointer-events:none;">
+                    <div
+                        style="width:6px;height:6px;background:var(--accent-cyan);border-radius:50%;position:absolute;top:-3px;left:50%;transform:translateX(-50%);box-shadow:var(--neon-cyan);">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ── EDUCATION ───────────────────────────────────────────── -->
+    <section id="education">
+
+        <span class="section-label">02 · Academic Journey</span>
+        <h2 class="section-title">
+            My <span class="gradient-text">Education</span> Timeline
+        </h2>
+
+        <div class="edu-timeline">
+            <div class="edu-line-fill"></div>
+
+            <!-- 10th -->
+            <div class="edu-item">
+                <div class="edu-card">
+                    <span class="edu-year-badge">📅 2019</span>
+                    <p class="edu-level">Secondary · Class 10th</p>
+                    <h3 class="edu-title">Secondary School Certificate</h3>
+                    <p class="edu-board">🏫 Rajasthan Board of Secondary Education (RBSE)</p>
+                    <div class="edu-score-wrapper">
+                        <span class="edu-score">55.33%</span>
+                        <span class="edu-score-label">Overall Percentage</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12th -->
+            <div class="edu-item">
+                <div class="edu-card">
+                    <span class="edu-year-badge">📅 2021</span>
+                    <p class="edu-level">Senior Secondary · Class 12th</p>
+                    <h3 class="edu-title">Higher Secondary Certificate</h3>
+                    <p class="edu-board">🏫 Rajasthan Board of Secondary Education (RBSE)</p>
+                    <p class="edu-board" style="margin-top:6px;font-size:0.78rem;color:var(--accent-cyan);letter-spacing:0.06em;">📚 Stream: Physics · Chemistry · Mathematics (PCM)</p>
+                    <div class="edu-score-wrapper">
+                        <span class="edu-score">78.20%</span>
+                        <span class="edu-score-label">Overall Percentage</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diploma -->
+            <div class="edu-item">
+                <div class="edu-card">
+                    <span class="edu-year-badge">📅 2023</span>
+                    <p class="edu-level">Diploma · Polytechnic Engineering</p>
+                    <h3 class="edu-title">Diploma in Mechanical Engineering</h3>
+                    <p class="edu-board">🏛️ Board of Technical Education, Rajasthan (BTER)</p>
+                    <div class="edu-score-wrapper">
+                        <span class="edu-score">7.8</span>
+                        <span class="edu-score-label">CGPA</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- B.Tech -->
+            <div class="edu-item">
+                <div class="edu-card">
+                    <span class="edu-year-badge">📅 2026</span>
+                    <p class="edu-level">Bachelor's Degree · B.Tech</p>
+                    <h3 class="edu-title">B.Tech — Computer Science &amp; Engineering</h3>
+                    <p class="edu-board">🎓 Pursuing · Lateral Entry via Diploma</p>
+                    <div class="edu-score-wrapper">
+                        <span class="edu-score">7.2</span>
+                        <span class="edu-score-label">CGPA (Current)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── PROJECTS ──────────────────────────────────────────── -->
+    <section id="projects">
+        <div class="projects-header">
+            <div>
+                <span class="section-label">03 · Mission Control</span>
+                <h2 class="section-title">Selected <span class="gradient-text">Projects</span></h2>
+            </div>
+            <div class="domain-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="iot">IoT</button>
+                <button class="filter-btn" data-filter="code">Code</button>
+                <button class="filter-btn" data-filter="sports">Sports</button>
+            </div>
+        </div>
+
+        <div class="projects-grid">
+
+            <div class="project-card" data-domain="iot">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <span class="project-card-icon">🏠</span>
+                        <span class="project-domain-badge">⚡ IoT</span>
+                        <h3 class="project-title">Smart Home Command</h3>
+                        <p class="project-desc">Fully automated home control using ESP32 & MQTT broker. Control lights,
+                            fans, and security from anywhere in the world via a React dashboard.</p>
+                        <div class="project-tech-stack">
+                            <span class="tech-pill">ESP32</span><span class="tech-pill">MQTT</span><span
+                                class="tech-pill">React</span><span class="tech-pill">Node.js</span>
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <h4 class="project-back-title">Key Features</h4>
+                        <ul class="project-feature-list">
+                            <li>Real-time sensor streaming (temp, humidity, motion)</li>
+                            <li>Voice control via WebSockets</li>
+                            <li>Energy monitoring dashboard</li>
+                            <li>Mobile PWA with offline support</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" class="project-link-btn">GitHub</a>
+                            <a href="#" class="project-link-btn">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-domain="code">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <span class="project-card-icon">🤖</span>
+                        <span class="project-domain-badge">💻 Code</span>
+                        <h3 class="project-title">AI Study Assistant</h3>
+                        <p class="project-desc">AI-powered tool that generates custom quizzes, summarizes PDFs, and
+                            tracks learning progress using NLP and spaced repetition algorithms.</p>
+                        <div class="project-tech-stack">
+                            <span class="tech-pill">Python</span><span class="tech-pill">OpenAI</span><span
+                                class="tech-pill">FastAPI</span><span class="tech-pill">MongoDB</span>
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <h4 class="project-back-title">Key Features</h4>
+                        <ul class="project-feature-list">
+                            <li>PDF ingestion with RAG pipeline</li>
+                            <li>Adaptive quiz based on weak areas</li>
+                            <li>Progress heatmap analytics</li>
+                            <li>Multi-language (Hindi + English)</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" class="project-link-btn">GitHub</a>
+                            <a href="#" class="project-link-btn">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-domain="sports">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <span class="project-card-icon">⚡</span>
+                        <span class="project-domain-badge">🏃 Sports</span>
+                        <h3 class="project-title">Athlete Performance Tracker</h3>
+                        <p class="project-desc">Wearable IoT device + app to track biometrics, sprint times, and fatigue
+                            in real-time. Built for coaches and competitive players.</p>
+                        <div class="project-tech-stack">
+                            <span class="tech-pill">Arduino</span><span class="tech-pill">BLE</span><span
+                                class="tech-pill">Flutter</span><span class="tech-pill">Firebase</span>
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <h4 class="project-back-title">Key Features</h4>
+                        <ul class="project-feature-list">
+                            <li>Heart rate, SpO2 & acceleration tracking</li>
+                            <li>AI fatigue detection via ML model</li>
+                            <li>Team dashboard with live alerts</li>
+                            <li>Post-training recovery guide</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" class="project-link-btn">GitHub</a>
+                            <a href="#" class="project-link-btn">Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-domain="iot">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <span class="project-card-icon">🌱</span>
+                        <span class="project-domain-badge">⚡ IoT</span>
+                        <h3 class="project-title">Smart Agri System</h3>
+                        <p class="project-desc">Precision agriculture with soil sensors, automated irrigation, and a
+                            weather-aware ML model to optimize crop yield across fields.</p>
+                        <div class="project-tech-stack">
+                            <span class="tech-pill">ESP8266</span><span class="tech-pill">LoRa</span><span
+                                class="tech-pill">TensorFlow</span><span class="tech-pill">Grafana</span>
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <h4 class="project-back-title">Key Features</h4>
+                        <ul class="project-feature-list">
+                            <li>Long-range LoRa mesh network</li>
+                            <li>AI-driven irrigation scheduling</li>
+                            <li>Weather API integration</li>
+                            <li>SMS alerts (no internet needed)</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" class="project-link-btn">GitHub</a>
+                            <a href="#" class="project-link-btn">Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-domain="code">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <span class="project-card-icon">💬</span>
+                        <span class="project-domain-badge">💻 Code</span>
+                        <h3 class="project-title">Real-Time Chat Platform</h3>
+                        <p class="project-desc">End-to-end encrypted messaging with rooms, file sharing, and emoji
+                            reactions. Built from scratch with WebSockets and Redis pub/sub.</p>
+                        <div class="project-tech-stack">
+                            <span class="tech-pill">Socket.IO</span><span class="tech-pill">Redis</span><span
+                                class="tech-pill">React</span><span class="tech-pill">Docker</span>
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <h4 class="project-back-title">Key Features</h4>
+                        <ul class="project-feature-list">
+                            <li>E2E encryption with RSA key exchange</li>
+                            <li>Redis Streams message persistence</li>
+                            <li>Presence & typing indicators</li>
+                            <li>Scales to 10,000+ concurrent users</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" class="project-link-btn">GitHub</a>
+                            <a href="#" class="project-link-btn">Live</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-domain="sports">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <span class="project-card-icon">🏆</span>
+                        <span class="project-domain-badge">🏃 Sports</span>
+                        <h3 class="project-title">Tournament Manager Pro</h3>
+                        <p class="project-desc">Full-featured sports tournament app with bracket generation, live
+                            scores, and player stats — deployed in 5+ inter-college events.</p>
+                        <div class="project-tech-stack">
+                            <span class="tech-pill">Next.js</span><span class="tech-pill">Supabase</span><span
+                                class="tech-pill">Tailwind</span><span class="tech-pill">PWA</span>
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <h4 class="project-back-title">Key Features</h4>
+                        <ul class="project-feature-list">
+                            <li>Auto bracket (single/double elim)</li>
+                            <li>Real-time scores via Supabase</li>
+                            <li>Player profiles with career stats</li>
+                            <li>PDF schedule + WhatsApp sharing</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" class="project-link-btn">GitHub</a>
+                            <a href="#" class="project-link-btn">Live</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── ACHIEVEMENTS ──────────────────────────────────────── -->
+    <section id="achievements">
+        <span class="section-label">04 · Hall of Fame</span>
+        <h2 class="section-title">Certificates &amp; <span class="gradient-text">Achievements</span></h2>
+
+        <div class="achievements-grid">
+
+            <div class="cert-card" data-type="gold">
+                <div class="cert-badge"><span class="cert-type">🥇 Championship</span><span
+                        class="cert-id">#AS-001</span></div>
+                <span class="cert-icon">🏆</span>
+                <h3 class="cert-title">State Level Athletics Champion</h3>
+                <p class="cert-issuer">State Sports Authority · Track &amp; Field</p>
+                <div class="cert-footer"><span class="cert-year">2025</span><span class="cert-verify">Verified</span>
+                </div>
+            </div>
+
+            <div class="cert-card" data-type="cyan">
+                <div class="cert-badge"><span class="cert-type">📜 Certification</span><span
+                        class="cert-id">#AS-002</span></div>
+                <span class="cert-icon">⚛️</span>
+                <h3 class="cert-title">Advanced React &amp; Next.js</h3>
+                <p class="cert-issuer">Meta · Professional Certificate</p>
+                <div class="cert-footer"><span class="cert-year">2025</span><span class="cert-verify">Verified</span>
+                </div>
+            </div>
+
+            <div class="cert-card" data-type="purple">
+                <div class="cert-badge"><span class="cert-type">🏅 Hackathon</span><span class="cert-id">#AS-003</span>
+                </div>
+                <span class="cert-icon">💡</span>
+                <h3 class="cert-title">Smart India Hackathon Finalist</h3>
+                <p class="cert-issuer">Ministry of Education · India</p>
+                <div class="cert-footer"><span class="cert-year">2024</span><span class="cert-verify">Verified</span>
+                </div>
+            </div>
+
+            <div class="cert-card" data-type="orange">
+                <div class="cert-badge"><span class="cert-type">🔌 IoT</span><span class="cert-id">#AS-004</span></div>
+                <span class="cert-icon">📡</span>
+                <h3 class="cert-title">IoT &amp; Embedded Systems</h3>
+                <p class="cert-issuer">Cisco Networking Academy</p>
+                <div class="cert-footer"><span class="cert-year">2024</span><span class="cert-verify">Verified</span>
+                </div>
+            </div>
+
+            <div class="cert-card" data-type="green">
+                <div class="cert-badge"><span class="cert-type">🏊 Sports</span><span class="cert-id">#AS-005</span>
+                </div>
+                <span class="cert-icon">🥈</span>
+                <h3 class="cert-title">Inter-University Swimming Silver</h3>
+                <p class="cert-issuer">University Sports Board</p>
+                <div class="cert-footer"><span class="cert-year">2024</span><span class="cert-verify">Verified</span>
+                </div>
+            </div>
+
+            <div class="cert-card" data-type="cyan">
+                <div class="cert-badge"><span class="cert-type">🐍 Python</span><span class="cert-id">#AS-006</span>
+                </div>
+                <span class="cert-icon">🤖</span>
+                <h3 class="cert-title">Machine Learning Specialization</h3>
+                <p class="cert-issuer">DeepLearning.AI · Stanford Online</p>
+                <div class="cert-footer"><span class="cert-year">2025</span><span class="cert-verify">Verified</span>
+                </div>
+            </div>
+
+            <div class="cert-card" data-type="purple">
+                <div class="cert-badge"><span class="cert-type">🏆 Winner</span><span class="cert-id">#AS-007</span>
+                </div>
+                <span class="cert-icon">🚀</span>
+                <h3 class="cert-title">College TechFest 1st Place</h3>
+                <p class="cert-issuer">Project Expo · Engineering Dept.</p>
+                <div class="cert-footer"><span class="cert-year">2023</span><span class="cert-verify">Verified</span>
+                </div>
+            </div>
+
+            <div class="cert-card" data-type="gold">
+                <div class="cert-badge"><span class="cert-type">☁️ Cloud</span><span class="cert-id">#AS-008</span>
+                </div>
+                <span class="cert-icon">⚡</span>
+                <h3 class="cert-title">AWS Cloud Practitioner</h3>
+                <p class="cert-issuer">Amazon Web Services</p>
+                <div class="cert-footer"><span class="cert-year">2025</span><span class="cert-verify">Verified</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── CONTACT ───────────────────────────────────────────── -->
+    <section id="contact">
+        <div class="contact-inner">
+            <span class="section-label">05 · Let's Connect</span>
+            <h2 class="section-title">
+                Got an Idea?<br>
+                <span class="gradient-text">Let's Build It.</span>
+            </h2>
+            <p class="contact-subtitle">
+                Whether it's an IoT project, a web app, a collaboration, or just a conversation about tech and sports —
+                I'm always ready.
+            </p>
+
+            <form class="contact-form" id="contactForm" onsubmit="sendToWhatsApp(event);">
+                <div class="form-group">
+                    <input type="text" class="form-input" id="nameInput" placeholder=" " autocomplete="off" required>
+                    <label class="form-label" for="nameInput">Your Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-input" id="emailInput" placeholder=" " autocomplete="off">
+                    <label class="form-label" for="emailInput">Email Address</label>
+                </div>
+                <div class="form-group textarea">
+                    <textarea class="form-textarea form-input" id="msgInput" placeholder=" " required></textarea>
+                    <label class="form-label" for="msgInput">Your Message</label>
+                </div>
+                <button type="submit" class="form-submit">Send Message &nbsp;🚀</button>
+            </form>
+
+            <script>
+                function sendToWhatsApp(e) {
+                    e.preventDefault();
+                    const name    = document.getElementById('nameInput').value.trim();
+                    const email   = document.getElementById('emailInput').value.trim();
+                    const message = document.getElementById('msgInput').value.trim();
+                    if (!name || !message) return;
+                    const text = `Hi Ayush! 👋%0AName: ${encodeURIComponent(name)}${email ? '%0AEmail: ' + encodeURIComponent(email) : ''}%0A%0AMessage:%0A${encodeURIComponent(message)}`;
+                    window.open(`https://wa.me/919588015592?text=${text}`, '_blank');
+                }
+            </script>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ─────────────────────────────────────────────── -->
+    <footer>
+        <div class="footer-logo glitch" data-text="AYUSH SAINI">AYUSH SAINI</div>
+
+        <div class="social-links">
+            <a href="#" class="social-link" aria-label="GitHub"> <i class="ri-github-fill"></i></a>
+            <a href="#" class="social-link" aria-label="LinkedIn"> <i class="ri-linkedin-fill"></i></a>
+            <a href="#" class="social-link" aria-label="Twitter"> <i class="ri-twitter-x-fill"></i></a>
+            <a href="#" class="social-link" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="social-link" aria-label="Email"> <i class="ri-mail-line"></i></a>
+        </div>
+
+        <p class="footer-copy">
+            © 2026 Ayush Saini &nbsp;·&nbsp; Crafted with ❤️ &amp; Three.js
+        </p>
+    </footer>
+
+    <!-- ── AUDIO TOGGLE ───────────────────────────────────────── -->
+    <button id="audio-toggle" title="Toggle ambient sound" aria-label="Toggle ambient music">
+        <div class="audio-wave-icon" id="audio-wave" style="display:none;">
+            <div class="audio-bar"></div>
+            <div class="audio-bar"></div>
+            <div class="audio-bar"></div>
+            <div class="audio-bar"></div>
+        </div>
+        <i class="ri-volume-mute-line audio-muted-icon" id="audio-muted-icon"></i>
+    </button>
+
+    <!-- ── SCRIPTS ────────────────────────────────────────────── -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+    <script src="main.js"></script>
+
+    <script>
+        /* Audio icon swap */
+        document.getElementById('audio-toggle').addEventListener('click', function () {
+            const wave = document.getElementById('audio-wave');
+            const muted = document.getElementById('audio-muted-icon');
+            const on = this.classList.contains('playing');
+            wave.style.display = on ? 'none' : 'flex';
+            muted.style.display = on ? 'inline' : 'none';
+        });
+    </script>
+
+</body>
+
+</html>
