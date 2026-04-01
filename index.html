@@ -54,29 +54,42 @@
         <canvas id="hero-canvas"></canvas>
         <div class="hero-grid-overlay"></div>
 
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span class="badge-dot"></span>
-                Available for Projects · 2026
+        <div class="hero-container">
+            <div class="hero-text-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Available for Projects · 2026
+                </div>
+
+                <h1 class="hero-name">
+                    <span class="word split-chars">AYUSH SAINI</span>
+                </h1>
+
+                <p class="hero-tagline">
+                    <span id="typed-text"></span><span class="typed-cursor">|</span>
+                    <br>
+                    Building the future — one circuit, one commit, one sprint at a time.
+                </p>
+
+                <div class="hero-cta-group">
+                    <a href="#projects" class="btn-primary magnetic">
+                        <i class="ri-rocket-line"></i> View My Work
+                    </a>
+                    <a href="#contact" class="btn-secondary magnetic">
+                        <i class="ri-send-plane-line"></i> Get In Touch
+                    </a>
+                </div>
             </div>
 
-            <h1 class="hero-name">
-                <span class="word split-chars">AYUSH SAINI</span>
-            </h1>
-
-            <p class="hero-tagline">
-                <span id="typed-text"></span><span class="typed-cursor">|</span>
-                <br>
-                Building the future — one circuit, one commit, one sprint at a time.
-            </p>
-
-            <div class="hero-cta-group">
-                <a href="#projects" class="btn-primary magnetic">
-                    <i class="ri-rocket-line"></i> View My Work
-                </a>
-                <a href="#contact" class="btn-secondary magnetic">
-                    <i class="ri-send-plane-line"></i> Get In Touch
-                </a>
+            <div class="hero-image-wrapper">
+                <div class="premium-photo-card">
+                    <div class="card-glow-reflection"></div>
+                    <div class="card-inner-frame">
+                        <img src="Ayush saini.webp" alt="Ayush Saini" class="hero-img">
+                        <div class="card-shimmer-sweep"></div>
+                    </div>
+                    <div class="card-aura-back"></div>
+                </div>
             </div>
         </div>
 
@@ -189,7 +202,9 @@
                     <p class="edu-level">Senior Secondary · Class 12th</p>
                     <h3 class="edu-title">Higher Secondary Certificate</h3>
                     <p class="edu-board">🏫 Rajasthan Board of Secondary Education (RBSE)</p>
-                    <p class="edu-board" style="margin-top:6px;font-size:0.78rem;color:var(--accent-cyan);letter-spacing:0.06em;">📚 Stream: Physics · Chemistry · Mathematics (PCM)</p>
+                    <p class="edu-board"
+                        style="margin-top:6px;font-size:0.78rem;color:var(--accent-cyan);letter-spacing:0.06em;">📚
+                        Stream: Physics · Chemistry · Mathematics (PCM)</p>
                     <div class="edu-score-wrapper">
                         <span class="edu-score">78.20%</span>
                         <span class="edu-score-label">Overall Percentage</span>
@@ -543,8 +558,8 @@
             <script>
                 function sendToWhatsApp(e) {
                     e.preventDefault();
-                    const name    = document.getElementById('nameInput').value.trim();
-                    const email   = document.getElementById('emailInput').value.trim();
+                    const name = document.getElementById('nameInput').value.trim();
+                    const email = document.getElementById('emailInput').value.trim();
                     const message = document.getElementById('msgInput').value.trim();
                     if (!name || !message) return;
                     const text = `Hi Ayush! 👋%0AName: ${encodeURIComponent(name)}${email ? '%0AEmail: ' + encodeURIComponent(email) : ''}%0A%0AMessage:%0A${encodeURIComponent(message)}`;
@@ -558,18 +573,25 @@
     <footer>
         <div class="footer-logo glitch" data-text="AYUSH SAINI">AYUSH SAINI</div>
 
-        <div class="social-links">
-            <a href="#" class="social-link" aria-label="GitHub"> <i class="ri-github-fill"></i></a>
-            <a href="#" class="social-link" aria-label="LinkedIn"> <i class="ri-linkedin-fill"></i></a>
-            <a href="#" class="social-link" aria-label="Twitter"> <i class="ri-twitter-x-fill"></i></a>
-            <a href="#" class="social-link" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
-            <a href="#" class="social-link" aria-label="Email"> <i class="ri-mail-line"></i></a>
+        <div class="social-links" id="social-links-final">
+            <a href="https://github.com/ayushsaini506" target="_blank" rel="noopener noreferrer" class="social-link link-github" aria-label="GitHub"> <i class="ri-github-fill"></i></a>
+            <a href="https://www.linkedin.com/in/ayush-saini-0979162b1" target="_blank" rel="noopener noreferrer" class="social-link link-linkedin" aria-label="LinkedIn"> <i class="ri-linkedin-fill"></i></a>
+            <a href="https://x.com/ayushsaini506" target="_blank" rel="noopener noreferrer" class="social-link link-x" aria-label="Twitter"> <i class="ri-twitter-x-fill"></i></a>
+            <a href="https://www.facebook.com/ayushsaini506" target="_blank" rel="noopener noreferrer" class="social-link link-facebook" aria-label="Facebook"> <i class="ri-facebook-fill"></i></a>
+            <a href="https://www.instagram.com/ayushsaini506" target="_blank" rel="noopener noreferrer" class="social-link link-instagram" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="mailto:contact@ayushsaini.com" target="_blank" rel="noopener noreferrer" class="social-link link-email" aria-label="Email"> <i class="ri-mail-line"></i></a>
         </div>
 
         <p class="footer-copy">
             © 2026 Ayush Saini &nbsp;·&nbsp; Crafted with ❤️ &amp; Three.js
         </p>
     </footer>
+
+    <!-- ── THEME TOGGLE (FIXED) ─────────────────────────── -->
+    <button id="theme-toggle" class="nav-toggle theme-toggle-fixed magnetic" aria-label="Toggle Theme">
+        <i class="ri-sun-line sun-icon"></i>
+        <i class="ri-moon-line moon-icon"></i>
+    </button>
 
     <!-- ── AUDIO TOGGLE ───────────────────────────────────────── -->
     <button id="audio-toggle" title="Toggle ambient sound" aria-label="Toggle ambient music">
@@ -598,6 +620,8 @@
             wave.style.display = on ? 'none' : 'flex';
             muted.style.display = on ? 'inline' : 'none';
         });
+        /* Debug Verify */
+        console.log('PORTFOLIO_V2_FINAL_SYSTEM_REBOOT_999');
     </script>
 
 </body>

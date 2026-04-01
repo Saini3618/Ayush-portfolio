@@ -40,210 +40,168 @@ function initThreeJS() {
   if (!canvas) return;
 
   const W = canvas.clientWidth, H = canvas.clientHeight;
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(W, H, false);
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(65, W / H, 0.1, 3000);
-  camera.position.z = 700;
+  const camera = new THREE.PerspectiveCamera(55, W / H, 0.1, 2000);
+  camera.position.z = 1000;
 
-  /* ---- 1. DEEP STAR LAYER (tiny white dots, very spread) ---- */
-  const starCount = window.innerWidth < 768 ? 2500 : 5000;
-  const sBuf = new Float32Array(starCount * 3);
-  const sSize = new Float32Array(starCount);
-  for (let i = 0; i < starCount; i++) {
-    sBuf[i * 3] = (Math.random() - 0.5) * 3000;
-    sBuf[i * 3 + 1] = (Math.random() - 0.5) * 3000;
-    sBuf[i * 3 + 2] = (Math.random() - 0.5) * 1200 - 400;
-    sSize[i] = Math.random() * 1.2 + 0.3;
-  }
-  const starGeo = new THREE.BufferGeometry();
-  starGeo.setAttribute('position', new THREE.BufferAttribute(sBuf, 3));
-  starGeo.setAttribute('aSize', new THREE.BufferAttribute(sSize, 1));
+  // --- 1. CORE CRYSTALLINE STRUCTURE ---
+  const coreGroup = new THREE.Group();
+  scene.add(coreGroup);
 
-  const starMat = new THREE.ShaderMaterial({
-    transparent: true, depthWrite: false,
-    vertexShader: `
-      attribute float aSize;
-      void main() {
-        vec4 mv = modelViewMatrix * vec4(position, 1.0);
-        gl_PointSize = aSize * (350.0 / -mv.z);
-        gl_Position = projectionMatrix * mv;
-      }`,
-    fragmentShader: `
-      void main() {
-        float d = distance(gl_PointCoord, vec2(0.5));
-        if (d > 0.5) discard;
-        float a = pow(1.0 - d * 2.0, 3.0);
-        gl_FragColor = vec4(0.78, 0.9, 1.0, a * 0.75);
-      }`
+  const geometry = new THREE.IcosahedronGeometry(300, 2);
+  const material = new THREE.MeshBasicMaterial({
+    color: 0x00f5ff,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.1
   });
-  scene.add(new THREE.Points(starGeo, starMat));
+  const coreMesh = new THREE.Mesh(geometry, material);
+  coreGroup.add(coreMesh);
 
-  /* ---- 2. NEBULA GLOW CLOUDS (large colour blobs) ---- */
-  function makeNebulaSprite(color, opacity, size) {
-    const cvs = document.createElement('canvas');
-    cvs.width = cvs.height = 256;
-    const ctx = cvs.getContext('2d');
-    const grad = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-    grad.addColorStop(0, color.replace(')', `, ${opacity})`).replace('rgb', 'rgba'));
-    grad.addColorStop(0.4, color.replace(')', `, ${opacity * 0.3})`).replace('rgb', 'rgba'));
-    grad.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 256, 256);
-    const tex = new THREE.CanvasTexture(cvs);
-    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
-    const sprite = new THREE.Sprite(mat);
-    sprite.scale.set(size, size, 1);
-    return sprite;
-  }
-
-  const nebulaDefs = [
-    { color: 'rgb(0,150,255)', opacity: 0.18, size: 800, x: -200, y: 80, z: -600 },
-    { color: 'rgb(120,0,255)', opacity: 0.15, size: 700, x: 250, y: -60, z: -500 },
-    { color: 'rgb(0,220,200)', opacity: 0.12, size: 600, x: 80, y: 200, z: -700 },
-    { color: 'rgb(255,60,160)', opacity: 0.10, size: 500, x: -300, y: -150, z: -550 },
-    { color: 'rgb(60,100,255)', opacity: 0.13, size: 900, x: 100, y: -80, z: -800 },
-  ];
-  nebulaDefs.forEach(d => {
-    const s = makeNebulaSprite(d.color, d.opacity, d.size);
-    s.position.set(d.x, d.y, d.z);
-    scene.add(s);
+  // Add points to the structure for a more tech look
+  const pointsMat = new THREE.PointsMaterial({
+    color: 0x00f5ff,
+    size: 4,
+    sizeAttenuation: true,
+    transparent: true,
+    opacity: 0.6
   });
+  const corePoints = new THREE.Points(geometry, pointsMat);
+  coreGroup.add(corePoints);
 
-  /* ---- 3. CONSTELLATION NODE PARTICLES (brighter, mid-layer) ---- */
-  const nodeCount = window.innerWidth < 768 ? 80 : 160;
-  const nPos = new Float32Array(nodeCount * 3);
-  const nData = [];   // store world-space coords for line drawing
-  for (let i = 0; i < nodeCount; i++) {
-    const x = (Math.random() - 0.5) * 1400;
-    const y = (Math.random() - 0.5) * 900;
-    const z = (Math.random() - 0.5) * 400 - 100;
-    nPos[i * 3] = x; nPos[i * 3 + 1] = y; nPos[i * 3 + 2] = z;
-    nData.push({ x, y, z, vx: (Math.random() - 0.5) * 0.15, vy: (Math.random() - 0.5) * 0.1 });
+  // Outer floating rings
+  const ringGeo = new THREE.TorusGeometry(450, 1, 16, 100);
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0xb44fff, transparent: true, opacity: 0.15 });
+  const ring1 = new THREE.Mesh(ringGeo, ringMat);
+  ring1.rotation.x = Math.PI / 2;
+  coreGroup.add(ring1);
+
+  const ring2 = new THREE.Mesh(new THREE.TorusGeometry(520, 0.5, 16, 100), ringMat);
+  ring2.rotation.y = Math.PI / 2;
+  coreGroup.add(ring2);
+
+  // --- 2. LUXURY PARTICLE FIELD ---
+  const particleCount = 2000;
+  const positions = new Float32Array(particleCount * 3);
+  const colors = new Float32Array(particleCount * 3);
+  const sizes = new Float32Array(particleCount);
+
+  for (let i = 0; i < particleCount; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 3000;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 3000;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 2000;
+
+    const color = new THREE.Color();
+    color.setHSL(0.5 + Math.random() * 0.2, 0.8, 0.5 + Math.random() * 0.3);
+    colors[i * 3] = color.r;
+    colors[i * 3 + 1] = color.g;
+    colors[i * 3 + 2] = color.b;
+
+    sizes[i] = Math.random() * 5 + 1;
   }
-  const nodeGeo = new THREE.BufferGeometry();
-  nodeGeo.setAttribute('position', new THREE.BufferAttribute(nPos, 3));
 
-  const nodeMat = new THREE.ShaderMaterial({
-    transparent: true, depthWrite: false,
-    vertexShader: `
-      void main() {
-        vec4 mv = modelViewMatrix * vec4(position, 1.0);
-        gl_PointSize = 4.0 * (350.0 / -mv.z);
-        gl_Position = projectionMatrix * mv;
-      }`,
-    fragmentShader: `
-      void main() {
-        float d = distance(gl_PointCoord, vec2(0.5));
-        if (d > 0.5) discard;
-        float a = pow(1.0 - d * 2.0, 2.0);
-        gl_FragColor = vec4(0.2, 0.85, 1.0, a * 0.9);   // cyan nodes
-      }`
-  });
-  const nodePoints = new THREE.Points(nodeGeo, nodeMat);
-  scene.add(nodePoints);
+  const particleGeo = new THREE.BufferGeometry();
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  particleGeo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
-  /* ---- 4. CONSTELLATION LINES ---- */
-  const maxDist = 220;
-  const linePositions = [];
-  for (let i = 0; i < nodeCount; i++) {
-    for (let j = i + 1; j < nodeCount; j++) {
-      const dx = nData[i].x - nData[j].x;
-      const dy = nData[i].y - nData[j].y;
-      if (Math.sqrt(dx * dx + dy * dy) < maxDist) {
-        linePositions.push(nData[i].x, nData[i].y, nData[i].z);
-        linePositions.push(nData[j].x, nData[j].y, nData[j].z);
-      }
-    }
-  }
-  const lineGeo = new THREE.BufferGeometry();
-  const lineBuf = new Float32Array(linePositions);
-  lineGeo.setAttribute('position', new THREE.BufferAttribute(lineBuf, 3));
-  const lineMat = new THREE.LineBasicMaterial({ color: 0x00c8ff, transparent: true, opacity: 0.12 });
-  scene.add(new THREE.LineSegments(lineGeo, lineMat));
-
-  /* ---- 5. FLOATING CYAN ACCENT SPARKLES ---- */
-  const sparkCount = 200;
-  const spBuf = new Float32Array(sparkCount * 3);
-  const spSize = new Float32Array(sparkCount);
-  for (let i = 0; i < sparkCount; i++) {
-    spBuf[i * 3] = (Math.random() - 0.5) * 1200;
-    spBuf[i * 3 + 1] = (Math.random() - 0.5) * 800;
-    spBuf[i * 3 + 2] = (Math.random() - 0.5) * 300;
-    spSize[i] = Math.random() * 2.5 + 1.0;
-  }
-  const spGeo = new THREE.BufferGeometry();
-  spGeo.setAttribute('position', new THREE.BufferAttribute(spBuf, 3));
-  spGeo.setAttribute('aSize', new THREE.BufferAttribute(spSize, 1));
-
-  const spMat = new THREE.ShaderMaterial({
-    transparent: true, depthWrite: false,
+  const particleMat = new THREE.ShaderMaterial({
+    uniforms: { time: { value: 0 } },
+    transparent: true,
     blending: THREE.AdditiveBlending,
+    depthWrite: false,
     vertexShader: `
-      attribute float aSize;
+      attribute float size;
+      varying vec3 vColor;
       void main() {
-        vec4 mv = modelViewMatrix * vec4(position, 1.0);
-        gl_PointSize = aSize * (300.0 / -mv.z);
-        gl_Position = projectionMatrix * mv;
-      }`,
+        vColor = color;
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = size * (300.0 / -mvPosition.z);
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    `,
     fragmentShader: `
+      varying vec3 vColor;
       void main() {
         float d = distance(gl_PointCoord, vec2(0.5));
         if (d > 0.5) discard;
-        float core = pow(1.0 - d * 2.0, 4.0);
-        float glow = pow(1.0 - d * 2.0, 1.5) * 0.3;
-        gl_FragColor = vec4(0.0, 0.95, 1.0, (core + glow) * 0.85);
-      }`
-  });
-  const sparkles = new THREE.Points(spGeo, spMat);
-  scene.add(sparkles);
-
-  /* ---- MOUSE PARALLAX ---- */
-  let mx = 0, my = 0, camX = 0, camY = 0;
-  window.addEventListener('mousemove', e => {
-    mx = (e.clientX / window.innerWidth - 0.5) * 2;
-    my = (e.clientY / window.innerHeight - 0.5) * 2;
+        gl_FragColor = vec4(vColor, 1.0 - (d * 2.0));
+      }
+    `,
+    vertexColors: true
   });
 
-  /* ---- RESIZE ---- */
-  window.addEventListener('resize', () => {
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h, false);
+  const particles = new THREE.Points(particleGeo, particleMat);
+  scene.add(particles);
+
+  // --- 3. INTERACTIVE LIGHT BEAMS ---
+  const beamCount = 8;
+  const beams = [];
+  for (let i = 0; i < beamCount; i++) {
+    const beamGeo = new THREE.CylinderGeometry(0.5, 4, 2000, 8);
+    const beamMat = new THREE.MeshBasicMaterial({
+      color: i % 2 === 0 ? 0x00f5ff : 0xb44fff,
+      transparent: true,
+      opacity: 0.05,
+      blending: THREE.AdditiveBlending
+    });
+    const beam = new THREE.Mesh(beamGeo, beamMat);
+    beam.position.set((Math.random() - 0.5) * 2000, (Math.random() - 0.5) * 2000, -500);
+    beam.rotation.x = Math.random() * Math.PI;
+    beam.rotation.z = Math.random() * Math.PI;
+    scene.add(beam);
+    beams.push(beam);
+  }
+
+  // --- MOUSE INTERACTION ---
+  let targetX = 0, targetY = 0;
+  let mouseX = 0, mouseY = 0;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX - W / 2) / (W / 2);
+    mouseY = (e.clientY - H / 2) / (H / 2);
   });
 
-  /* ---- ANIMATE ---- */
+  // --- ANIMATION RE-SYNC ---
   const clock = new THREE.Clock();
-  let rafId;
   function animate() {
-    rafId = requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
+    requestAnimationFrame(animate);
+    const time = clock.getElapsedTime();
 
-    // Smooth camera drift
-    camX += (mx * 55 - camX) * 0.03;
-    camY += (-my * 35 - camY) * 0.03;
-    camera.position.x += (camX - camera.position.x) * 0.06;
-    camera.position.y += (camY - camera.position.y) * 0.06;
+    targetX += (mouseX - targetX) * 0.05;
+    targetY += (mouseY - targetY) * 0.05;
 
-    // Stars slow drift
-    starGeo.attributes.position.needsUpdate = false;
-    nodePoints.rotation.y = Math.sin(t * 0.04) * 0.06;
-    nodePoints.rotation.x = Math.sin(t * 0.025) * 0.04;
-    sparkles.rotation.y = t * 0.009;
-    sparkles.rotation.z = Math.sin(t * 0.015) * 0.025;
+    camera.position.x += (targetX * 200 - camera.position.x) * 0.05;
+    camera.position.y += (-targetY * 200 - camera.position.y) * 0.05;
+    camera.lookAt(scene.position);
 
-    // Nebula gentle pulsing via camera z
-    camera.position.z = 700 + Math.sin(t * 0.15) * 15;
+    coreGroup.rotation.y = time * 0.15;
+    coreGroup.rotation.z = time * 0.1;
+
+    ring1.rotation.y = time * 0.4;
+    ring2.rotation.x = time * 0.3;
+
+    particles.rotation.y = time * 0.05;
+    particleMat.uniforms.time.value = time;
+
+    beams.forEach((beam, i) => {
+      beam.position.y += Math.sin(time + i) * 0.5;
+      beam.rotation.y += 0.002;
+    });
 
     renderer.render(scene, camera);
   }
   animate();
 
-  document.addEventListener('visibilitychange', () => {
-    document.hidden ? cancelAnimationFrame(rafId) : animate();
+  window.addEventListener('resize', () => {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false);
   });
 }
 
@@ -267,6 +225,22 @@ function initAnimations() {
   initAudio();
   initCounters();
   initEducationLines();
+  initTheme();
+}
+
+// ======= THEME TOGGLE =======
+function initTheme() {
+  const toggle = document.getElementById('theme-toggle');
+  if (!toggle) return;
+
+  const currentTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+
+  toggle.addEventListener('click', () => {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  });
 }
 
 // ======= TYPEWRITER =======
